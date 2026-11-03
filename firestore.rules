@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. spinCodes: Admin generates codes linked to reward; Customer reads & marks unused -> used.
+    match /spinCodes/{codeId} {
+      allow read, write: if true;
+    }
+
+    // 2. spinCustomers: Append-only customer spin records; never deleted or overwritten.
+    match /spinCustomers/{customerId} {
+      allow read, create, update: if true;
+      allow delete: if false;
+    }
+
+    // 3. spinOffers: Active wheel rewards (Admin adds, activates/deactivates, or deletes offers)
+    match /spinOffers/{offerId} {
+      allow read, write: if true;
+    }
+
+    // 4. spinHistory: Immutable spin audit history; never deleted.
+    match /spinHistory/{historyId} {
+      allow read, create, update: if true;
+      allow delete: if false;
+    }
+
+    // 5. spinSettings: Global Lucky Spin configuration
+    match /spinSettings/{settingId} {
+      allow read, write: if true;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "customers",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "spinStatus", "order": "ASCENDING" },
+        { "fieldPath": "registrationTimestamp", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "accessCodes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
